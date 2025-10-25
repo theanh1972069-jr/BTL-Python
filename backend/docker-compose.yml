@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  db:
+    # Sử dụng PostgreSQL phiên bản ổn định
+    image: postgres:14-alpine 
+    # Tên container sẽ là postgres-sms
+    container_name: postgres-sms 
+    # Định nghĩa biến môi trường cho database
+    environment:
+      POSTGRES_USER: postgres       # DB_USER
+      POSTGRES_PASSWORD: postgres   # DB_PASSWORD
+      POSTGRES_DB: school           # DB_NAME
+    # Ánh xạ cổng: 5432 trên máy tính của bạn sẽ trỏ đến cổng 5432 của container
+    ports:
+      - "5432:5432"
+    # Dữ liệu sẽ được lưu trữ cục bộ, không bị mất khi container dừng
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
