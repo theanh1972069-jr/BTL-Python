@@ -25,20 +25,28 @@ class Settings(BaseSettings):
 
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
 
-    @validator("SQLALCHEMY_DATABASE_URI", pre=True)
+    # @validator("SQLALCHEMY_DATABASE_URI", pre=True)
+    # def assemble_db_connection(
+    #     cls, v: Optional[str], values: Dict[str, Any]
+    # ) -> Any:
+    #     if isinstance(v, str):
+    #         return v
+    #     return PostgresDsn.build(
+    #         scheme="postgresql",
+    #         user=values.get("DB_USER"),
+    #         password=values.get("DB_PASSWORD"),
+    #         host=values.get("DB_HOST"),
+    #         port=values.get("DB_PORT"), # Bổ sung Port vào đây
+    #         path=f"/{values.get('DB_NAME') or  ''}",
+    #     )
+
     def assemble_db_connection(
         cls, v: Optional[str], values: Dict[str, Any]
     ) -> Any:
         if isinstance(v, str):
             return v
-        return PostgresDsn.build(
-            scheme="postgresql",
-            user=values.get("DB_USER"),
-            password=values.get("DB_PASSWORD"),
-            host=values.get("DB_HOST"),
-            port=values.get("DB_PORT"), # Bổ sung Port vào đây
-            path=f"/{values.get('DB_NAME') or  ''}",
-        )
+        # Sử dụng dialect 'mysql+pymysql'
+        return f"mysql+pymysql://{values.get('DB_USER')}:{values.get('DB_PASSWORD')}@{values.get('DB_HOST')}:{values.get('DB_PORT')}/{values.get('DB_NAME')}"
 
     class Config:
         case_sensitive = True

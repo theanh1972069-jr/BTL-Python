@@ -1,7 +1,7 @@
 // Dashboard.jsx
-import React, { useState, useEffect } from 'react';
-import OverviewCard from '../OverviewCard';
-import DetailCard from '../DetailCard';
+import { useState, useEffect } from 'react';
+import OverviewCard from './OverviewCard';
+import DetailCard from './DetailCard';
 import { fetchDashboardData } from '../api/mockApi'; 
 
 const Dashboard = () => {

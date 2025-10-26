@@ -2,8 +2,8 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import Dashboard from './components/Dashboard';
-import '../styles/Dashboard.css'; // Import CSS
+import Dashboard from './Dashboard';
+import '../style/Dashboard.css';
 
 const App = () => {
   return (
